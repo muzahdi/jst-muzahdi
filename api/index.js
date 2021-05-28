@@ -27,7 +27,7 @@ bot.onText(/\/predict/, (msg) => {
         msg.chat.id,
         `masukkan nilai i|v contohnya 9|9`
     );   
-    state  = 1
+    state  = 1;
 });
 
 bot.on('message',(msg) => {
@@ -37,20 +37,20 @@ bot.on('message',(msg) => {
         i = s[0]
         v = s[1]
         model.predict(
-        [
-            parseFloat(req.params.i), // string to float
-            parseFloat(req.params.r)
-        ]
-    ).then((jres)=>{
-      bot.sendMessage(
-          msg.chat.id,
-         `nilai v yang diprediksi adalah s{jres[0]} volt`
-      );
-      bot.sendMessage(
-          msg.chat.id,
-         `nilai p yang diprediksi adalah s{jres[0]} watt`
-      );   
-    })
+            [
+                 parseFloat(req.params.i), // string to float
+                 parseFloat(req.params.r)
+            ]
+       ).then((jres)=>{
+           bot.sendMessage(
+               msg.chat.id,
+               `nilai v yang diprediksi adalah s{jres[0]} volt`
+           );
+           bot.sendMessage(
+               msg.chat.id,
+               `nilai p yang diprediksi adalah s{jres[0]} watt`
+           );   
+        })
     }else{
         state = 0
     }
