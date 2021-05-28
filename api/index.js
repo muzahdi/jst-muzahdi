@@ -21,7 +21,7 @@ bot.onText(/\/start/, (msg) => {
 });
 
 state = 0
-bot.onText(/\/menu/, (msg) => { 
+bot.onText(/\/predict/, (msg) => { 
     console.log(msg)
     bot.sendMessage(
         msg.chat.id,
