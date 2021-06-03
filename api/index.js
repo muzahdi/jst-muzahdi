@@ -61,7 +61,11 @@ bot.on('message',(msg) => {
             })
         })
     }else{
-        state = 0
+        bot.sendMessage(
+        msg.chat.id,
+            `Please Click /start`
+        );
+        state = 0;
     }
 })
 // routers
