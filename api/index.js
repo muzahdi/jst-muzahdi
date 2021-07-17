@@ -1,5 +1,5 @@
 var express = require('express');
-var r = express.Router();
+var x2 = express.Router();
 
 // load pre-trained model
 const model = require('./sdk/model.js'); // predict
@@ -37,23 +37,28 @@ bot.on('message',(msg) => {
         model.predict(
             [
                  parseFloat(s[0]), // string to float
-                 parseFloat(s[1])
+                 parseFloat(s[1]),
+                 parseFloat(s[2])
             ]
        ).then((jres1)=>{
            console.log(jres1);
             
-            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]), parseFloat(jres1[0]), parseFloat(jres1[1]), parseFloat(jres1[2])]).then((jres3)=>{
                bot.sendMessage(
                    msg.chat.id,
-                   `nilai v yang diprediksi adalah ${jres1[0]} volt`
+                   `nilai sudut motor y1 yang diprediksi adalah ${jres1[0]}`
                );
                bot.sendMessage(
                    msg.chat.id,
-                   `nilai p yang diprediksi adalah ${jres1[1]} watt`
+                   `nilai sudut motor y2 yang diprediksi adalah ${jres1[1]}`
                );
                bot.sendMessage(
                    msg.chat.id,
-                   `Klasifikasi Tegangan ${jres2}`
+                   `nilai sudut motor y3 yang diprediksi adalah ${jres1[2]}`
+               );
+               bot.sendMessage(
+                   msg.chat.id,
+                   `Klasifikasi sudut motor ${jres3}`
                );
             })
         })
@@ -70,8 +75,9 @@ bot.on('message',(msg) => {
 r.get('/predict/:i/:r', function(req, res, next) {
      model.predict(
         [
-            parseFloat(req.params.i), // string to float
-            parseFloat(req.params.r)
+            parseFloat(req.params.x1), // string to float
+            parseFloat(req.params.x2),
+            parseFloat(req.params.x3)
         ]
      ).then((jres)=>{
          res.json(jres);
@@ -79,19 +85,22 @@ r.get('/predict/:i/:r', function(req, res, next) {
 });
 
 // routers
-r.get('/classify/:i/:r', function(req, res, next) {    
+r.get('/classify/:x1/:x2/:x3', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.i), // string to float
-            parseFloat(req.params.r)
+            parseFloat(req.params.x1), // string to float
+            parseFloat(req.params.x2),
+            parseFloat(req.params.x3)
         ]
     ).then((jres)=>{
         cls_model.classify(
             [
-                parseFloat(req.params.i), // string to float
-                parseFloat(req.params.r),
+                parseFloat(req.params.x1), // string to float
+                parseFloat(req.params.x2),
+                parseFloat(req.params.x3),
                 parseFloat(jres[0]),
-                parseFloat(jres[1])
+                parseFloat(jres[1]),
+                parseFloat(jres[2])
             ]
      ).then((jres_)=>{
             res.json({jres, jres_})
@@ -99,4 +108,4 @@ r.get('/classify/:i/:r', function(req, res, next) {
     })
 });
 
-module.exports = r;
+module.exports = x2;
