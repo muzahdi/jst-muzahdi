@@ -21,7 +21,7 @@ bot.onText(/\/start/, (msg) => {
     state = 0;
 });
 
-//input requires i and r
+//input requires x1, x2, x3
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
