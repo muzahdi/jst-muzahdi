@@ -1,5 +1,5 @@
 var express = require('express');
-var x2 = express.Router();
+var r = express.Router();
 
 // load pre-trained model
 const model = require('./sdk/model.js'); // predict
@@ -108,4 +108,4 @@ r.get('/classify/:x1/:x2/:x3', function(req, res, next) {
     })
 });
 
-module.exports = x2;
+module.exports = r;
