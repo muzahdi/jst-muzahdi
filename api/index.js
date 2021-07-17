@@ -46,19 +46,19 @@ bot.on('message',(msg) => {
             cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]), parseFloat(jres1[0]), parseFloat(jres1[1]), parseFloat(jres1[2])]).then((jres3)=>{
                bot.sendMessage(
                    msg.chat.id,
-                   `nilai sudut motor y1 yang diprediksi adalah ${jres1[0]}`
+                   `nilai y1 yang diprediksi adalah ${jres1[0]}`
                );
                bot.sendMessage(
                    msg.chat.id,
-                   `nilai sudut motor y2 yang diprediksi adalah ${jres1[1]}`
+                   `nilai y2 yang diprediksi adalah ${jres1[1]}`
                );
                bot.sendMessage(
                    msg.chat.id,
-                   `nilai sudut motor y3 yang diprediksi adalah ${jres1[2]}`
+                   `nilai y3 yang diprediksi adalah ${jres1[2]}`
                );
                bot.sendMessage(
                    msg.chat.id,
-                   `Klasifikasi sudut motor ${jres3}`
+                   `Klasifikasi ${jres3}`
                );
             })
         })
