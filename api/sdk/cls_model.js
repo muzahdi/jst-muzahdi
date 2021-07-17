@@ -1,11 +1,13 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    i = (data[0] - 12.585) / 6.813882
-    r = (data[1] - 51.4795) / 29.151289
-    v = (data[2] - 650.4795) / 552.635
-    p = (data[3] - 10620.56) / 12152.78
-    return [i, r, v, p]
+    x1 = (data[0] - 42.773) / 10.33017
+    x2 = (data[1] - 29.9412) / 8.936247
+    x3 = (data[2] - 94.8964) / 8.887377
+    y1 = (data[3] - 32.2718) / 16.08198
+    y2 = (data[4] - 39.959) / 8.918815
+    y3 = (data[5] - 69.739) / 11.79956
+    return [x1, x2, x3, y1, y2, y3]
 }
 
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el,idx]).reduce(compareFn)[1]
@@ -28,7 +30,7 @@ function ArgMax(res){
 }
 
 async function classify(data){
-    let in_dim = 4; // i r v p
+    let in_dim = 6; // x1 x2 x3 y1 y2 y3
     
     data = normalized(data);
     shape = [1, in_dim];
