@@ -25,7 +25,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `masukkan nilai i|v contohnya 9|9`
+        `masukkan nilai x1|x2|x3`
     );   
     state  = 1;
 });
@@ -72,7 +72,7 @@ bot.on('message',(msg) => {
 })
 
 //routers
-r.get('/predict/:i/:r', function(req, res, next) {
+r.get('/predict/:x1/:x2/:x3', function(req, res, next) {
      model.predict(
         [
             parseFloat(req.params.x1), // string to float
